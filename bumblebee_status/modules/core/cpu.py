@@ -40,7 +40,7 @@ class Module(core.module.Module):
 
     @property
     def _format(self):
-        return self.parameter("format", "{:.01f}%")
+        return self.parameter("format", "{:05.2f}%")
 
     def utilization(self, widget):
         return self._format.format(widget.get("utilization", 0.0))
