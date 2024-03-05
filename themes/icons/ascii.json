@@ -16,7 +16,7 @@
     "fan": { "prefix": "fan" }
   },
   "disk": {
-    "prefix": "hdd"
+    "prefix": "disk"
   },
   "dnf": {
     "prefix": "dnf"
