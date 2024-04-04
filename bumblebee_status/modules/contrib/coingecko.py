@@ -10,11 +10,14 @@ import core.decorators
 
 
 def fetch_prices(coins, currency):
-    return (
-        requests
-            .get("https://api.coingecko.com/api/v3/simple/price?ids=" + ",".join(coins) + "&include_24hr_change=true&vs_currencies=" + currency)
-            .json()
-    )
+    try:
+        return (
+            requests
+                .get("https://api.coingecko.com/api/v3/simple/price?ids=" + ",".join(coins) + "&include_24hr_change=true&vs_currencies=" + currency)
+                .json()
+        )
+    except:
+        return None
 
 def get_price_from_response(response, coin, currency):
     try:
