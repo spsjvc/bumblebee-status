@@ -22,6 +22,7 @@ import re
 import shutil
 import netifaces
 import subprocess
+import os
 
 import core.module
 import core.decorators
@@ -51,8 +52,8 @@ class Module(core.module.Module):
                 self._states["include"].append(state)
         self._format = self.parameter("format", "{intf} {state} {ip} {ssid} {strength}")
 
-        self._strength_threshold_critical = self.parameter("strength_critical", 30)
-        self._strength_threshold_warning = self.parameter("strength_warning", 50)
+        self._strength_threshold_critical = util.format.asint(self.parameter("strength_critical", 30))
+        self._strength_threshold_warning = util.format.asint(self.parameter("strength_warning", 50))
 
         # Limits for the accepted dBm values of wifi strength
         self.__strength_dbm_lower_bound = -110
@@ -178,15 +179,11 @@ class Module(core.module.Module):
         if not self._iswlan(intf) or self._istunnel(intf) or not self.iw:
             return None
 
-        with open("/proc/net/wireless", "r") as file:
-            for line in file:
-                if intf in line:
-                    # Remove trailing . by slicing it off ;)
-                    strength_dbm = line.split()[3][:-1]
-                    return util.format.asint(strength_dbm,
-                                minimum=self.__strength_dbm_lower_bound,
-                                maximum=self.__strength_dbm_upper_bound)
-
+        iw_info = util.cli.execute("{} dev {} link".format(self.iw, intf))
+        for line in iw_info.split("\n"):
+            match = re.match(r"^\s+signal:\s(.+) dBm$", line)
+            if match:
+                return int(match.group(1))
         return None
 
     def convert_strength_dbm_percent(self, signal):
