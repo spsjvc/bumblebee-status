@@ -9,15 +9,9 @@ import core.input
 import core.decorators
 
 
-def fetch_metar(airport):
+def fetch(url):
     try:
-        res = requests.get("https://metar.no/" + airport).text
-        match = re.search(r"<p class=\"text-gray-700\">(.*?)</p>", res)
-
-        if match:
-            return match.group(1)
-        else:
-            return None
+        return requests.get(url).text
 
     except:
         return None
@@ -27,6 +21,8 @@ class Module(core.module.Module):
     @core.decorators.every(minutes=5)
     def __init__(self, config, theme):
         super().__init__(config, theme, core.widget.Widget(self.output))
+
+        self.provider = self.parameter("provider")
 
         self.airports = self.parameter("airports").split(",")
         self.airports_index = 0
@@ -42,15 +38,12 @@ class Module(core.module.Module):
             self.airports_index = 0
 
     def update(self):
-        metar = fetch_metar(self.airports[self.airports_index])
+        metar = fetch(self.provider + "/" + self.airports[self.airports_index])
 
         if metar is None:
             self.data = ""
         else:
-            self.data = (
-                "METAR {metar}"
-                    .replace("{metar}", metar)
-            )
+            self.data = metar
 
     def output(self, widget):
         return self.data
