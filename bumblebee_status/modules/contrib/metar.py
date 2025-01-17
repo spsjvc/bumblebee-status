@@ -24,7 +24,7 @@ def fetch_metar(airport):
 
 
 class Module(core.module.Module):
-    @core.decorators.every(minutes=30)
+    @core.decorators.every(minutes=5)
     def __init__(self, config, theme):
         super().__init__(config, theme, core.widget.Widget(self.output))
 
@@ -40,8 +40,6 @@ class Module(core.module.Module):
 
         if self.airports_index == len(self.airports):
             self.airports_index = 0
-
-        self.update()
 
     def update(self):
         metar = fetch_metar(self.airports[self.airports_index])
