@@ -27,7 +27,6 @@ import util.cli
 
 
 class Module(core.module.Module):
-    @core.decorators.every(seconds=30)
     def __init__(self, config, theme):
         super().__init__(config, theme, core.widget.Widget(self.brightness))
 
@@ -95,7 +94,7 @@ class Module(core.module.Module):
             if isinstance(tmp, str):
                 self.__brightness = tmp
             else:
-                self.__brightness = "{:3.0f}%".format(float(tmp))
+                self.__brightness = "{:2.0f}%".format(float(tmp))
         except:
             self.__brightness = "n/a"
 
