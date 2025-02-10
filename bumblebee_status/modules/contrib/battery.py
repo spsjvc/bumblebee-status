@@ -149,7 +149,7 @@ class Module(core.module.Module):
             capacity = self.__manager.capacity(widget.name)
         widget.set("capacity", capacity)
         widget.set("ac", self.__manager.isac_any(self._batteries))
-        widget.set("theme.minwidth", "100%")
+        # widget.set("theme.minwidth", "100%")
 
         # Read power conumption
         if util.format.asbool(self.parameter("showpowerconsumption", False)):
