@@ -69,7 +69,7 @@
             "bg": "#859900"
         }
     },
-    "coingecko": {
+	"coingecko": {
 		"up": {
 			"fg": "#b8bb26"
 		},
