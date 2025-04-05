@@ -627,6 +627,22 @@ contributed by `TheEdgeOfRage <https://github.com/TheEdgeOfRage>`_ - many thanks
 
 .. image:: ../screenshots/caffeine.png
 
+calendar
+~~~~~~~~
+Extended version of datetime module which displays a small popup calendar and can open google calendar in the browser
+
+Parameters:
+    * popupcal.format: strftime()-compatible formatting string
+    * popupcal.locale: locale to use rather than the system default
+    * popupcal.bg: background colors. default black.
+    * popupcal.fg: foreground colors. default white.
+    * popupcal.browserpath: path to broweser. default /usr/bin/firefox
+
+Requires:
+    tkcalendar
+
+.. image:: ../screenshots/calendar.png
+    
 cmus
 ~~~~
 
@@ -1502,6 +1518,19 @@ Parameters:
 
 contributed by `lonesomebyte537 <https://github.com/lonesomebyte537>`_ - many thanks!
 
+scratchpad
+~~~~~~~~~~
+
+Displays a count of windows on the scratchpad, Left click to launch a rofi window picker for scratchpads
+
+Requirements:
+    * i3ipc
+    * python-rofi
+
+contributed by `theymightbetim <https://github.com/theymightbetim>`
+
+.. image:: ../screenshots/scratchpad.png
+
 sensors
 ~~~~~~~
 
@@ -1768,7 +1797,7 @@ Parameters:
     * title.max : Maximum character length for title before truncating. Defaults to 64.
     * title.placeholder : Placeholder text to be placed if title was truncated. Defaults to '...'.
     * title.scroll : Boolean flag for scrolling title. Defaults to False
-    * title.short : Boolean flag for short title. Defaults to False
+    * title.short : true/false/prefix. Defaults to False
 
 
 contributed by `UltimatePancake <https://github.com/UltimatePancake>`_ - many thanks!
