@@ -31,12 +31,12 @@ class Module(core.module.Module):
         return self.__format.format(self.__packages)
 
     def hidden(self):
-        return False
+        return self.__packages == 0
 
     def update(self):
         self.__error = False
         code, result = util.cli.execute(
-            "yay -Qu", ignore_errors=True, return_exitcode=True
+            "yay -Qum", ignore_errors=True, return_exitcode=True
         )
 
         if code == 0:
@@ -47,6 +47,11 @@ class Module(core.module.Module):
         else:
             self.__error = True
             logging.error("aur-update exited with {}: {}".format(code, result))
+
+    def state(self, widget):
+        if self.__error:
+            return "warning"
+        return self.threshold_state(self.__packages, 1, 100)
 
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
