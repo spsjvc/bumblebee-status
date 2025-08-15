@@ -1,0 +1,23 @@
+{
+  "icons": ["awesome-fonts"],
+  "defaults": {
+    "warning": {
+      "fg": "#11111b",
+      "bg": "#fab387"
+    },
+    "critical": {
+      "fg": "#11111b",
+      "bg": "#f38ba8"
+    }
+  },
+  "cycle": [
+    {
+      "fg": "#cdd6f4",
+      "bg": "#11111b"
+    },
+    {
+      "fg": "#cdd6f4",
+      "bg": "#181825"
+    }
+  ]
+}
